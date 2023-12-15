@@ -8,7 +8,7 @@ import mat73
 import probabilities as p
 
 # Load the directed graph
-graph = np.load('parents.npy')
+graph = np.load('distributions/parents.npy')
 
 
 # Load the data
@@ -47,6 +47,6 @@ if __name__ == '__main__':
     
     
         
-    np.save('node_probs/mu_bar.npy', mu_bar)
-    np.save('node_probs/cov.npy', cov)
-    np.save('node_probs/single_normal.npy', single_normal)
+    np.save('distributions/mu_bar.npy', mu_bar)
+    np.save('distributions/cov.npy', cov)
+    np.save('distributions/single_normal.npy', single_normal)

@@ -72,8 +72,8 @@ def save_graph_csv(graph, path):
 
 
 if __name__ == '__main__':
-    mi_path = "data/I.npy"
-    network_path = "data/parents.npy"
+    mi_path = "distributions/I.npy"
+    network_path = "distributions/parents.npy"
     mst = compute_mst(mi_path)
     parents = get_network_parents(mst)
     save_graph_npy(parents, network_path)

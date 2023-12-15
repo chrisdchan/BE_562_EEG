@@ -30,7 +30,7 @@ def buildI(data, i, j, I):
 
 if __name__ == '__main__':
 
-    currentI = np.load('I.npy')
+    currentI = np.load('distributions/I.npy')
 
     # Define matrix
     with m.Manager() as manager:
@@ -49,5 +49,5 @@ if __name__ == '__main__':
                 process.join()    
             finish = time.perf_counter()
             print(f'Finished in {round(finish-start, 2)} second(s)')
-            np.save('I.npy', L)
+            np.save('distributions/I.npy', L)
 
