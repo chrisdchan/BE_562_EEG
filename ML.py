@@ -12,7 +12,7 @@ graph = np.load('parents.npy')
 
 
 # Load the data
-data_dict = mat73.loadmat('separated_data/train.mat')
+data_dict = mat73.loadmat('preprocessed_data/train.mat')
 train = data_dict['train']
 
 
