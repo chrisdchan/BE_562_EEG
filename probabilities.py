@@ -96,4 +96,3 @@ def getI(data, X1, X2):
 
         I += integrate.dblquad(calculate, -60, 60, -60, 60, args=(joint, x1pdf, x2pdf))[0]*pC
     return I
-
