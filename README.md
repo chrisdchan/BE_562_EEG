@@ -1,4 +1,5 @@
-# BE 562 Final Project: Predicting the Brain’s Internally-Generated Spatial Representations Using Tree Augmented Bayesian Networks
+# BE 562 Final Project: 
+## Predicting the Brain’s Internally-Generated Spatial Representations Using Tree Augmented Bayesian Networks
 
 This code uses Tree Augmented Bayesian Networks to predict Internally-Generated Spatial Representations.
 
