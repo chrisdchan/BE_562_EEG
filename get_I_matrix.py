@@ -13,11 +13,15 @@ import probabilities as p
 data_dict = mat73.loadmat('preprocessed_data/train.mat')
 parsed = data_dict['train']
 
+# Change this to calculate parameters for 'visible' or 'position'
+CLASS = 'position'
+
+# Get CPU count on the SCC
 print(m.cpu_count())
 
 
 def buildI(data, i, j, I):
-    a = p.getI(data,i,j)
+    a = p.getI(data,i,j,CLASS)
 
     tmp = I[i]
     tmp[j] = a
@@ -30,7 +34,7 @@ def buildI(data, i, j, I):
 
 if __name__ == '__main__':
 
-    currentI = np.load('distributions/I.npy')
+    currentI = np.load(('distributions/' + CLASS + '/I.npy'))
 
     # Define matrix
     with m.Manager() as manager:
@@ -49,5 +53,5 @@ if __name__ == '__main__':
                 process.join()    
             finish = time.perf_counter()
             print(f'Finished in {round(finish-start, 2)} second(s)')
-            np.save('distributions/I.npy', L)
+            np.save(('distributions/' + CLASS + '/I.npy'), L)
 

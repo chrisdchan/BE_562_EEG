@@ -1,54 +1,75 @@
 # Function definitions for the probabilities for mutual information
 import numpy as np
-import math
-from scipy import stats
-import multiprocessing as m
-import time
-from scipy import integrate
+from math import log
+from scipy import stats, integrate
 
+def pClass(data, state):
+    """
+    returns the probability of a class
 
-def seen(data, state=True):
-    "This function returns the P(C)"
+    param data: a list of class integers
+    param state: current state
+    return: P(C)
+    """
 
     total = len(data)
     condition = 0
     for i in range(total):
-        if data[i] == 1:
+        if data[i] == state:
             condition += 1
 
     prob = condition/total
 
-    if state == True:
-        return prob
-    else:
-        return 1-prob
+    return prob
+
     
-def getCx_pdf(data, x, C, p=False):
-    "This function returns the mu and sigma for the P(x|C)"
+def getCx_pdf(data, X, C, class_type="visible", return_params=False):
+    """
+    returns the mu and sigma for the P(x|C)
+
+    param data: data structure
+    param X: attribute #
+    param C: value of the given class
+    param class_type: string of the structure key for the class (default is 'visible')
+    param return_params: return model parameters instead of the distribution object
+    return: P(x|C) distribution
+    """
 
     # Find mu and sigma
     list = []
     for i in range(len(data['data'])):
-        if data['visible'][i] == C:
-            list.append(data['data'][i][x])
+        if data[class_type][i] == C:
+            list.append(data['data'][i][X])
     mu = np.mean(list)
     std = np.std(list)
 
-    if p == False:
+    # Return the paramerters or the distribution object
+    if return_params == False:
         return stats.norm(mu, std)
     else:
         return [mu, std]
 
-def getJointCx_pdf(data, x1, x2, C, t=False):
-    "This function returns the mu and sigma for the joint gaussian P(x1, x2 | C)"
+
+def getJointCx_pdf(data, X1, X2, C, class_type="visible", return_params=False):
+    """
+    returns the distribution for the joint gaussian of two attributes P(x1, x2 | C)
+
+    param data: data structure
+    param X1: first attribute #
+    param X1: second attribute #
+    param C: value of the given class
+    param class_type: string of the structure key for the class (default is 'visible')
+    param return_params: return model parameters instead of the distribution object
+    return: P(x1, x2 | C) distribution
+    """
 
     # Find mu and sigma
     list1 = []
     list2 = []
     for i in range(len(data['data'])):
-        if data['visible'][i] == C:
-            list1.append(data['data'][i][x1])
-            list2.append(data['data'][i][x2])
+        if data[class_type][i] == C:
+            list1.append(data['data'][i][X1])
+            list2.append(data['data'][i][X2])
 
     mu1 = np.mean(list1)
     mu2 = np.mean(list2)
@@ -60,39 +81,49 @@ def getJointCx_pdf(data, x1, x2, C, t=False):
         "cov": cov
     }
 
-    if t == False:
+    if return_params == False:
         return stats.multivariate_normal(mu, cov)
     else:
         return params
 
 
 
-def getI(data, X1, X2):
+def getI(data, X1, X2, class_type="visible"):
+    """
+    returns the mutual information between two attributes X1 and X2
 
-    Ctrue = seen(data['visible'])
-    Cfalse = 1 - Ctrue
+    param data: data structure
+    param X1: first attribute #
+    param X1: second attribute #
+    param class_type: string of the structure key for the class (default is 'visible')
+    return: mutual information between two attributes X1 and X2
+    """
 
+    # Initialize information and an epsilon
     I = 0
     epsilon = 0.0000000000000001 
 
-    def calculate(y, x, joint, x1pdf, x2pdf):
+    # Define the integrand for integration
+    def integrand(y, x, joint, x1pdf, x2pdf):
         p0 = joint.pdf([y,x])
         p2 = x1pdf.pdf(y)
         p3 = x2pdf.pdf(x)
 
-        iter = p0*math.log(((p0)/(p2*p3))+epsilon)
+        iter = p0*log(((p0)/(p2*p3))+epsilon)
 
         return iter
 
-    for c in range(2):
-        joint = getJointCx_pdf(data, X1, X2, c)
-        x1pdf = getCx_pdf(data, X1, c)
-        x2pdf = getCx_pdf(data, X2, c)
+    # Get the unique values of the class
+    c_range = np.unique(data[class_type]).astype(int)
 
-        if c == 1:
-            pC = Ctrue
-        else:
-            pC = Cfalse
+    # Sum mutal information for each class
+    for c in c_range:
+        joint = getJointCx_pdf(data, X1, X2, c, class_type)
+        x1pdf = getCx_pdf(data, X1, c, class_type)
+        x2pdf = getCx_pdf(data, X2, c, class_type)
 
-        I += integrate.dblquad(calculate, -60, 60, -60, 60, args=(joint, x1pdf, x2pdf))[0]*pC
+        pC = pClass(data[class_type], c)
+
+        I += integrate.dblquad(integrand, -60, 60, -60, 60, args=(joint, x1pdf, x2pdf))[0]*pC
+
     return I
