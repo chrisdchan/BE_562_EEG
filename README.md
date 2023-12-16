@@ -1,29 +1,29 @@
 # BE 562 Final Project: 
-## Predicting the Brain’s Internally-Generated Spatial Representations Using Tree Augmented Bayesian Networks
-
-This code uses Tree Augmented Bayesian Networks to predict Internally-Generated Spatial Representations.
+### Predicting the Brain’s Internally-Generated Spatial Representations Using Tree Augmented Bayesian Networks
 
 ## Getting Started
-
-To load the project, clone the git repository onto your PC.
 
 ### Prerequisites
 
 The things you need before installing the software.
 
-* Python 3.8.10
+* Python 3.8.10 or later
 * git bash
 * vscode (or any text editor)
 
 ### Installation
 
-Once the repo is cloned onto your PC, git bash onto the directory with the env/ folder and activate the python virtual environment as follows.
+To load the project, clone the git repository onto your PC.
 
 ```
-$ cd env/Scripts
-$ . activate
-$ cd ..
-$ cd ..
+$ git clone https://github.com/chrisdchan/BE_562_EEG.git
+```
+
+Once the repo is cloned onto your PC, it is recomended to create a python virtual environment. This can be done in git bash using the following commands
+
+```
+$ python -m venv env
+$ source env/Scripts/activate
 ```
 Once activated, download the required dependencies.
 
@@ -33,17 +33,18 @@ $ pip install -r requirements.txt
 
 ## Usage
 
-blah blah blah
+To 
 
 ```
 $ example code
 ```
 blah blah blah
 
-## How it works
+## Important Notes
 
+Although the MATLAB scriptd for EEG preprcessing are given, we did not include the raw data due to the shear amount of data. The raw files can be found [here.](https://figshare.com/articles/dataset/tracking_task_dataset/13933058/1) The preprocessed data is given in the repo.
 
 
 ## Acknowledgments
 
-Created by Massinissa Bosli, Chris Chan, Teertha Ayanji, & Vatsal Shrivastava
+Created by Massinissa Bosli, Chris Chan, Teertha Ayanji, & Vatsal Shrivastava for BE 562
