@@ -49,6 +49,11 @@ Once activeted, download the required dependencies.
 pip install -r requirements.txt
 ```
 
+### Downloading the Preprocessed Data
+
+Due to the size of the files, even the preprocessed data was not able to be uploaded onto github. The preprocessed_data folder should 
+be put in the directory `/BE_562_EEG/preprcessed_data` 
+
 ## Usage
 
 To run code that calculates the test accuracies, run "test_model.ipynb". The notebook will calculate the test accuracies described in the report and is commented for ease of undeRstanding.  
