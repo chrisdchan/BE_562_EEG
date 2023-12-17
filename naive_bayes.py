@@ -1,5 +1,5 @@
 import numpy as np
-from scipy.stats import norm, multivariate_normal
+from scipy.stats import norm
 
 class NaiveBayes():
 

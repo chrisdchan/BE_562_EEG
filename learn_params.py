@@ -11,7 +11,7 @@ import probabilities as p
 CLASS = 'visible'
 
 # Load the directed graph
-graph = np.load(('distributions/' + CLASS + '/parents.npy'))
+graph = np.load(('distributions/' + CLASS + '/intuitive/parents.npy'))
 
 # Load the data
 data_dict = mat73.loadmat('preprocessed_data/all_subjects/train.mat')
@@ -60,7 +60,7 @@ if __name__ == '__main__':
             single_normal[i][c_idx] = idiv[parent][c_idx]
 
     # Save the data
-    root = 'distributions/' + CLASS + '/'
+    root = 'distributions/' + CLASS + '/intuitive/'
     np.save((root + 'mu_bar.npy'), mu_bar)
     np.save((root + 'cov.npy'), cov)
     np.save((root + 'single_normal.npy'), single_normal)

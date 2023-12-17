@@ -81,20 +81,19 @@ class Model():
                 correct += 1
                 correct_local += 1
 
-            '''
+            
             if i % 100 == 0 and i != 0:
                 print(f'Running Accuracy: {correct / i} windowed: {correct_local / 100} for {i} samples')
-                print(predictions)
                 predictions = []
                 correct_local = 0
-            '''
             
+            '''
             print(f'Running Accuracy: {correct / (i+1)}')
             print(f'Likelihoods: {likelihood}')
             print(f'Prediction: {prediction}')
             print(f'Correct Class: {y[i]}')
             print('------------------------')
-            
+            '''
 
         accuracy = correct / N
         print(f'Accuracy is {accuracy}')
