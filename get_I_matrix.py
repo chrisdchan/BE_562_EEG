@@ -10,7 +10,7 @@ import multiprocessing as m
 import probabilities as p
 
 # Load the data
-data_dict = mat73.loadmat('preprocessed_data/train.mat')
+data_dict = mat73.loadmat('preprocessed_data/all_subjects/train.mat')
 parsed = data_dict['train']
 
 # Change this to calculate parameters for 'visible' or 'position'

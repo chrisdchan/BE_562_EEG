@@ -76,7 +76,7 @@ if __name__ == '__main__':
     network_path = "distributions/parents.npy"
     mst = compute_mst(mi_path)
     parents = get_network_parents(mst)
-    save_graph_npy(parents, network_path)
+    np.save(network_path, parents)
 
     
 

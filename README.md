@@ -16,29 +16,50 @@ The things you need before installing the software.
 To load the project, clone the git repository onto your PC.
 
 ```
-$ git clone https://github.com/chrisdchan/BE_562_EEG.git
+git clone https://github.com/chrisdchan/BE_562_EEG.git
 ```
 
 Once the repo is cloned onto your PC, it is recomended to create a python virtual environment. This can be done in git bash using the following commands
 
 ```
-$ python -m venv env
-$ source env/Scripts/activate
+python -m venv env
 ```
-Once activated, download the required dependencies.
+
+To activate the virtual environment, run:  
+On Mac:
+```
+source env/bin/activate
+```
+In Windows CMD:
+```
+ env/Scripts/activate.bat
+```
+In Windows Powershell:
+```
+ env/Scripts/Activate.ps1
+```
+In Git BASH:
+```
+source env/Scripts/activate
+```
+
+Once activeted, download the required dependencies.
 
 ```
-$ pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ## Usage
 
-To 
+To run code that calculates the test accuracies, run "test_model.ipynb". The notebook will calculate the test accuracies described in the report and is commented for ease of undeRstanding.  
 
+Model parameters are already claculated and stored in the "dependencies" folder. To run the code that calculates these, run:
 ```
-$ example code
+get_I_matrix.py
+Kruskal.py
+learn_params.py
 ```
-blah blah blah
+NOTE: The script "get_I_matrix.py" utilized multiprocessing to calculte the I matrix. Since it utilizes integration, it can take a long time to run (~ 2 hours with multiprocessing). DO NOT RECCOMEND TO RUN
 
 ## Important Notes
 

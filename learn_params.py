@@ -8,13 +8,13 @@ import mat73
 import probabilities as p
 
 # Change this to calculate parameters for 'visible' or 'position'
-CLASS = 'position'
+CLASS = 'visible'
 
 # Load the directed graph
 graph = np.load(('distributions/' + CLASS + '/parents.npy'))
 
 # Load the data
-data_dict = mat73.loadmat('preprocessed_data/train.mat')
+data_dict = mat73.loadmat('preprocessed_data/all_subjects/train.mat')
 train = data_dict['train']
 
 
@@ -60,6 +60,7 @@ if __name__ == '__main__':
             single_normal[i][c_idx] = idiv[parent][c_idx]
 
     # Save the data
-    np.save('distributions/' + CLASS + '/mu_bar.npy', mu_bar)
-    np.save('distributions/' + CLASS + '/cov.npy', cov)
-    np.save('distributions/' + CLASS + '/single_normal.npy', single_normal)
+    root = 'distributions/' + CLASS + '/'
+    np.save((root + 'mu_bar.npy'), mu_bar)
+    np.save((root + 'cov.npy'), cov)
+    np.save((root + 'single_normal.npy'), single_normal)
