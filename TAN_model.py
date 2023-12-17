@@ -21,6 +21,8 @@ class Model():
         self.classes = classes
         self.num_classes = len(classes)
         self.num_dims = num_dims
+
+        # Store model parameters such that parents can be indexed by child node
         self.mu_parents = single_normal[parents, :, 0]
         self.sig_parents = single_normal[parents, :, 1]
 
@@ -29,14 +31,15 @@ class Model():
         return coef * math.exp(-0.5 * math.pow((x - mu) / sigma, 2))
 
     def classify(self, x):
-        likelihood = np.ones((self.num_classes,))
+        likelihood = np.ones((self.num_classes,)) # Store likelihood for each class
         for c in range(self.num_classes):
 
-            node_probabilities = np.ones((self.num_dims, ))
+            node_probabilities = np.ones((self.num_dims, )) # Store probability for each node
 
             mu_0 = self.single_normal[0][c][0]
             sigma_0 = self.single_normal[0][c][1]
 
+            # Node at t=0 is a special case and only has the class node as its parent
             node_probabilities[0] = norm.pdf(x[0], mu_0, sigma_0)
 
             for node in range(1, self.num_dims):
@@ -52,6 +55,8 @@ class Model():
 
                 joint_prob = multivariate_normal.pdf(joint_value, mu_bar, cov)
                 parent_prob = norm.pdf(parent_value, mu_parent, sigma_parent)
+
+                # Compute P(x | parent(x), c) with definition of conditional probability
                 node_probabilities[node] = joint_prob / parent_prob
 
             log_node_probabilities = np.log(node_probabilities) 
