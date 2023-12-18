@@ -8,7 +8,7 @@ import mat73
 import probabilities as p
 
 # Change this to calculate parameters for 'visible' or 'position'
-CLASS = 'visible'
+CLASS = 'position'
 
 # Load the directed graph
 graph = np.load(('distributions/' + CLASS + '/intuitive/parents.npy'))

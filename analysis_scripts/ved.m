@@ -33,11 +33,17 @@ std1 = std(node_sums1,0,1)./20;
 figure(1)
 hold on;
 x = 1:size(node_sums0,2);
-fill([x, flip(x)], [node_means0+std0, flip(node_means0-std0)], [0.8 0.8 0.8])
-plot(node_means0)
+%fill([x, flip(x)], [node_means0+std0, flip(node_means0-std0)], [0.8 0.8 0.8])
+plot(t,node_means0)
+title('Event Related Potentials C = "visible"')
+xlabel('Time (ms)')
+ylabel('Amplitude (mV)')
 
 figure(2)
 hold on;
 x = 1:size(node_sums1,2);
-fill([x, flip(x)], [node_means1+std1, flip(node_means1-std1)], [0.8 0.8 0.8])
-plot(node_means1)
+%fill([x, flip(x)], [node_means1+std1, flip(node_means1-std1)], [0.8 0.8 0.8])
+plot(t,node_means1)
+title('Event Related Potentials C = "invisible"')
+xlabel('Time (ms)')
+ylabel('Amplitude (mV)')

@@ -1,5 +1,5 @@
 import numpy as np
-from scipy.stats import norm, multivariate_normal
+from scipy.stats import norm
 
 class NaiveBayes():
     def __init__(self, single_normal, priors, num_classes=2, num_dims=300):
@@ -18,7 +18,7 @@ class NaiveBayes():
             log_node_probs = np.log(node_probs)
             likelihood[c] = np.sum(log_node_probs) + self.priors[c]
 
-        return np.argmax(likelihood)
+        return np.argmin(likelihood)
 
     def test(self, X, y):
         N, _ = X.shape
